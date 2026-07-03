@@ -10,6 +10,7 @@ from .extensions import (
     cors,
 )
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -19,6 +20,17 @@ def create_app():
     jwt.init_app(app)
     bcrypt.init_app(app)
     cors.init_app(app)
+
+    # -------------------------
+    # Home Route
+    # -------------------------
+    @app.route("/")
+    def home():
+        return {
+            "message": "Society Maintenance Tracker API is running 🚀",
+            "status": "success",
+            "version": "1.0.0",
+        }
 
     # Import models
     from app.models import User, Complaint, ComplaintHistory, Notice
